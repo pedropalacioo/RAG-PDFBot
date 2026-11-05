@@ -1,0 +1,38 @@
+# PDF Bot com RAG — dependências
+# Pipeline: extração -> chunking -> embeddings -> busca top-k -> LLM -> resposta + fontes
+
+# --- Extração de PDF (src/pdfbot/extracao.py) ---
+pymupdf>=1.24            # import pymupdf (antigo: import fitz)
+
+# --- Embeddings (src/pdfbot/embeddings.py) ---
+sentence-transformers>=3.0   # modelo: paraphrase-multilingual-MiniLM-L12-v2 (CPU)
+
+# --- Índice vetorial / busca top-k (src/pdfbot/indice.py) ---
+numpy>=1.26              # produto escalar + argsort; np.save para persistir
+
+# --- LLM (src/pdfbot/llm.py) ---
+google-genai>=1.0        # Gemini (Google AI Studio), chave em GEMINI_API_KEY
+
+# --- API (src/pdfbot/api.py) ---
+fastapi>=0.115
+pydantic>=2.7            # schemas de requisição/resposta
+uvicorn[standard]>=0.30  # servidor ASGI
+python-multipart>=0.0.9  # obrigatório para UploadFile (POST /documentos)
+
+# --- Interface (app/streamlit_app.py) ---
+streamlit>=1.38
+requests>=2.32           # Streamlit conversa com a API via HTTP
+
+# --- Configuração ---
+python-dotenv>=1.0       # carregar .env fora do docker compose
+
+# --- Testes (tests/) ---
+pytest>=8.0
+httpx>=0.27              # exigido pelo fastapi.testclient.TestClient
+
+# --- Opcionais (etapas "para ir além"; descomente quando for usar) ---
+# langchain-text-splitters>=0.3   # RecursiveCharacterTextSplitter (chunking)
+# faiss-cpu>=1.8                  # alternativa ao NumPy: IndexFlatIP
+# chromadb>=0.5                   # alternativa com persistência + metadados
+# groq>=0.11                      # provedor LLM alternativo ao Gemini
+# ragas>=0.2                      # avaliação automática de RAG (eval/)

@@ -1,0 +1,18 @@
+# Segredos
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Dados locais (PDFs e índices gerados)
+data/pdfs/*
+data/indices/*
+!data/**/.gitkeep
+
+# SO / editores
+.DS_Store
+.idea/
+.vscode/
