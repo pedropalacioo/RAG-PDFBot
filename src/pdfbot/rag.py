@@ -1,5 +1,6 @@
-"""Orquestra: pergunta -> busca -> prompt -> resposta + fontes. (Dia 3)"""
+"""Orchestrates: question -> search -> prompt -> answer + sources. (Day 3)"""
 
+# The prompt stays in Portuguese on purpose: it defines the language the bot answers in.
 SYSTEM = """Você responde perguntas sobre um documento.
 Regras:
 1. Use SOMENTE as informações do CONTEXTO.
@@ -9,11 +10,11 @@ Regras:
 4. Responda em português, de forma direta."""
 
 
-def montar_prompt(pergunta: str, trechos: list[dict]) -> str:
+def build_prompt(question: str, passages: list[dict]) -> str:
     raise NotImplementedError
 
 
-def responder(pergunta: str) -> dict:
-    """Retorna {"resposta": str, "fontes": [int, ...]}."""
-    # TODO: recusar antes de chamar o LLM se o melhor score < config.LIMIAR_SCORE.
+def answer(question: str) -> dict:
+    """Returns {"answer": str, "sources": [int, ...]}."""
+    # TODO: refuse before calling the LLM if the best score < config.SCORE_THRESHOLD.
     raise NotImplementedError

@@ -1,4 +1,4 @@
-# Segredos
+# Secrets
 .env
 
 # Python
@@ -7,12 +7,12 @@ __pycache__/
 .pytest_cache/
 .venv/
 
-# Dados locais (PDFs e índices gerados)
+# Local data (PDFs and generated indexes)
 data/pdfs/*
-data/indices/*
+data/indexes/*
 !data/**/.gitkeep
 
-# SO / editores
+# OS / editors
 .DS_Store
 .idea/
 .vscode/

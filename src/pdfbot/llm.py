@@ -1,14 +1,14 @@
-"""Conceito 5 — interface do LLM (padrão Strategy). (Dia 3)"""
+"""Concept 5 — LLM interface (Strategy pattern). (Day 3)"""
 
 from abc import ABC, abstractmethod
 
 
-class ProvedorLLM(ABC):
+class LLMProvider(ABC):
     @abstractmethod
-    def gerar(self, system: str, prompt: str) -> str: ...
+    def generate(self, system: str, prompt: str) -> str: ...
 
 
-class ProvedorGemini(ProvedorLLM):
-    def gerar(self, system: str, prompt: str) -> str:
-        # TODO: google-genai com temperatura baixa; chave em config.GEMINI_API_KEY.
+class GeminiProvider(LLMProvider):
+    def generate(self, system: str, prompt: str) -> str:
+        # TODO: google-genai with low temperature; key in config.GEMINI_API_KEY.
         raise NotImplementedError

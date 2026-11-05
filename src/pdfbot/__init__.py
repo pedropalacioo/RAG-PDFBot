@@ -1,1 +1,1 @@
-"""PDF Bot com RAG."""
+"""PDF Bot with RAG."""

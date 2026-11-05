@@ -1,4 +1,4 @@
-"""Interface Streamlit: só conversa com a API, nunca importa o pdfbot direto. (Dia 4)"""
+"""Streamlit interface: only talks to the API, never imports pdfbot directly. (Day 4)"""
 
 import os
 
@@ -7,13 +7,13 @@ import streamlit as st
 
 API_URL = os.environ.get("API_URL", "http://localhost:8000")
 
-st.title("PDF Bot com RAG")
+st.title("PDF Bot with RAG")
 
 try:
-    requests.get(f"{API_URL}/saude", timeout=3).raise_for_status()
-    st.success(f"API conectada em {API_URL}")
+    requests.get(f"{API_URL}/health", timeout=3).raise_for_status()
+    st.success(f"API connected at {API_URL}")
 except requests.RequestException:
-    st.error(f"API indisponível em {API_URL}")
+    st.error(f"API unavailable at {API_URL}")
 
-# TODO: upload do PDF (POST /documentos), campo de pergunta (POST /perguntas)
-# e as fontes abaixo da resposta.
+# TODO: PDF upload (POST /documents), question field (POST /questions)
+# and the sources below the answer.

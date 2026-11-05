@@ -1,4 +1,4 @@
-# PDF Bot com RAG
+# PDF Bot with RAG
 
-Responde perguntas usando apenas o conteúdo de um PDF e cita as páginas de origem.
-Pipeline: extração (PyMuPDF) → chunking → embeddings (sentence-transformers) → busca top-k → LLM (Gemini) → resposta + fontes.
+Answers questions using only the content of a PDF and cites the source pages.
+Pipeline: extraction (PyMuPDF) → chunking → embeddings (sentence-transformers) → top-k search → LLM (Gemini) → answer + sources.
