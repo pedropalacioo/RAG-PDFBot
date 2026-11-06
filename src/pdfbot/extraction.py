@@ -14,7 +14,7 @@ def _clear(text: str) -> str:
 
 
 def extract_pages(path: str) -> list[dict]:
-    # [{"page": }]
+    # [{"page": int, "text": String}]
     pages = []
     with pymupdf.open(path) as doc:
         for page in doc:
