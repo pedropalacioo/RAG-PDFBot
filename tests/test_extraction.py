@@ -1,6 +1,9 @@
-from pdfbot.extraction import extract_pages
+from pdfbot.extraction import extract_pages, _clear
+import pdfbot.extraction
 import pymupdf
 import pytest
+import subprocess
+import sys
 
 @pytest.fixture
 def text_pdf(make_pdf):
@@ -34,6 +37,32 @@ def encrypted_pdf(make_pdf):
     )
 
 # Tests
+
+def test_ligatures_are_normalized():
+    assert _clear("deﬁnition") == "definition"
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("infor-\r\nmação em\r\noutra linha", "informação em outra linha"),
+        ("uma \u00a0 palavra", "uma palavra"),
+        ("primeiro\r\n\r\nsegundo", "primeiro\n\nsegundo"),
+    ],
+)
+def test_clear_normalizes_before_cleaning(text, expected):
+    assert _clear(text) == expected
+
+
+def test_cli_requires_pdf_path():
+    result = subprocess.run(
+        [sys.executable, pdfbot.extraction.__file__],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 2
+    assert "path" in result.stderr
+    assert "Traceback" not in result.stderr
 
 def test_pdf_numbered_text(text_pdf):
     assert extract_pages(text_pdf) == [

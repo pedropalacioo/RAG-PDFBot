@@ -15,6 +15,38 @@ def test_sequential_ids_across_pages():
 def test_empty_input():
     assert chunk([{"page": 1, "text": ""}], 800, 120) == []
 
+
+@pytest.mark.parametrize("tail_length", [1, 49, 50])
+def test_tail_length_boundary(tail_length):
+    text = "a" * 800 + "b" * tail_length
+    result = chunk([{"page": 1, "text": text}])
+    if tail_length < 50:
+        assert result == [{"id": 0, "page": 1, "start": 0, "text": text}]
+    else:
+        assert len(result) == 2
+        assert result[0]["text"] == text[:800]
+        assert result[1]["text"] == text[result[1]["start"]:]
+
+
+def test_short_tail_after_word_boundary_is_absorbed():
+    text = "a" * 790 + " " + "b" * 20
+    assert chunk([{"page": 1, "text": text}]) == [
+        {"id": 0, "page": 1, "start": 0, "text": text}
+    ]
+
+
+def test_absorbed_tail_preserves_overlap_and_page_boundaries():
+    text = "a" * 1500 + "b" * 29
+    result = chunk([
+        {"page": 1, "text": text},
+        {"page": 2, "text": "short"},
+    ])
+    assert result == [
+        {"id": 0, "page": 1, "start": 0, "text": text[:800]},
+        {"id": 1, "page": 1, "start": 680, "text": text[680:]},
+        {"id": 2, "page": 2, "start": 0, "text": "short"},
+    ]
+
 @pytest.mark.parametrize(
     "size, overlap",
     [
