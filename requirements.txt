@@ -11,7 +11,7 @@ sentence-transformers>=3.0   # model: paraphrase-multilingual-MiniLM-L12-v2 (CPU
 numpy>=1.26              # dot product + argsort; np.save to persist
 
 # --- LLM (src/pdfbot/llm.py) ---
-google-genai>=1.0        # Gemini (Google AI Studio), key in GEMINI_API_KEY
+groq>=1.0                # LLM (Groq), key in GROQ_API_KEY
 
 # --- API (src/pdfbot/api.py) ---
 fastapi>=0.115
@@ -34,5 +34,4 @@ httpx>=0.27              # required by fastapi.testclient.TestClient
 # langchain-text-splitters>=0.3   # RecursiveCharacterTextSplitter (chunking)
 # faiss-cpu>=1.8                  # NumPy alternative: IndexFlatIP
 # chromadb>=0.5                   # alternative with persistence + metadata
-# groq>=0.11                      # LLM provider alternative to Gemini
 # ragas>=0.2                      # automatic RAG evaluation (eval/)

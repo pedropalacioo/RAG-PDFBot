@@ -3,8 +3,12 @@
 import os
 from pathlib import Path
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash")
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+LLM_MODEL = os.environ.get("LLM_MODEL", "openai/gpt-oss-120b")
 EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
 
 CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", 450))
