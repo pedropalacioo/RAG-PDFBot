@@ -14,7 +14,7 @@ def load(folder: Path) -> tuple[np.ndarray, list[dict]]:
     raise NotImplementedError
 
 
-def search(question_vector: np.ndarray, vectors: np.ndarray, chunks: list[dict], k: int = 4) -> list[dict]:
-    """Returns the k closest chunks, each with a "score" key."""
-    # TODO: dot product (= cosine with normalized vectors) + argsort.
-    raise NotImplementedError
+def search(question_vector, vectors, chunks, k=4):
+    scores = vectors @ question_vector    # no lugar de: scores = ...
+    top = np.argsort(-scores)[:k]         # no lugar de: np.argsort(...)
+    return [{**chunks[i], "score": float(scores[i])} for i in top]
